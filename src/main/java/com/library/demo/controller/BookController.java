@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("api/book")
@@ -23,5 +24,20 @@ public class BookController {
     @GetMapping
     public List<BookResponse> getBooks() {
         return bookService.getBooks();
+    }
+
+    @GetMapping("/{id}")
+    public BookResponse getBookById(@PathVariable UUID id) {
+        return bookService.findBookById(id);
+    }
+
+    @PutMapping("/{id}")
+    public BookResponse updateBook(@PathVariable UUID id, @RequestBody BookRequest bookRequest) {
+        return bookService.updateBook(id, bookRequest);
+    }
+
+    @DeleteMapping
+    public void deleteBookById(@RequestBody UUID id) {
+        bookService.deleteBookById(id);
     }
 }

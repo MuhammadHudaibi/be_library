@@ -37,4 +37,32 @@ public class BookServiceImpl implements BookService {
         List<Book> books = bookRepository.findAll();
         return books.stream().map(BookMapper::toBookResponse).collect(Collectors.toList());
     }
+
+    @Override
+    public BookResponse findBookById(UUID id) {
+        return BookMapper.toBookResponse(findById(id));
+    }
+
+    @Override
+    public BookResponse updateBook(UUID id, BookRequest bookRequest) {
+        Book book = findById(id);
+        book.setTitle(bookRequest.getTitle());
+        book.setAuthor(bookRequest.getAuthor());
+        book.setAuthor(bookRequest.getAuthor());
+        book.setYearPublished(bookRequest.getYearPublished());
+        book.setStock(bookRequest.getStock());
+        bookRepository.save(book);
+
+        return BookMapper.toBookResponse(book);
+    }
+
+    @Override
+    public void deleteBookById(UUID id) {
+        bookRepository.deleteById(id);
+    }
+
+    @Override
+    public Book findById(UUID id) {
+        return bookRepository.findById(id).orElse(null);
+    }
 }
