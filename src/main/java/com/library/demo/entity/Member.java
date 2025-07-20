@@ -26,4 +26,6 @@ public class Member {
     private String address;
 
     private String phoneNumber;
+
+    private Boolean isActive;
 }

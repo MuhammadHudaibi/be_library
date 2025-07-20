@@ -30,4 +30,6 @@ public class Book {
     private Integer yearPublished;
 
     private Integer stock;
+
+    private Boolean isAvailable;
 }
